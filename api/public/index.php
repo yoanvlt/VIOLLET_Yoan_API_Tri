@@ -2,7 +2,7 @@
 
 use api\src\controller\EndPoint;
 
-require_once(__DIR__ . "/../src/controller/EndPoint.php");
+require_once(__DIR__ . "/../src/Controller/EndPoint.php");
 
 
 // Définir le bon en-tête pour indiquer que la réponse est en JSON

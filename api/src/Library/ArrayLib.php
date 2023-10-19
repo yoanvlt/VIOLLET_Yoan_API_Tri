@@ -1,6 +1,6 @@
 <?php
 
-namespace api\src\library;
+namespace api\src\Library;
 class ArrayLib
 {
 

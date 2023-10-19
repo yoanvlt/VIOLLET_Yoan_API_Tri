@@ -1,8 +1,8 @@
 <?php
 
-namespace api\src\controller;
+namespace api\src\Controller;
 
-require_once(__DIR__ . "/../library/ArrayLib.php");
+require_once(__DIR__ . "/../Library/ArrayLib.php");
 
 class EndPoint {
 
