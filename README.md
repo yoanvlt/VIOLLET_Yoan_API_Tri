@@ -1,22 +1,27 @@
 # VIOLLET_Yoan_API_Tri
 
 ## Aperçu du Projet
-Ce projet a été réalisé dans le cadre d'un devoir scolaire. Il met l'accent sur l'implémentation de divers algorithmes de tri, notamment le tri par insertion, le tri à bulle et le tri rapide. La spécificité de ce projet est que ces algorithmes sont accessibles via une API, offrant une interaction pour le tri de données.
+
+VIOLLET_Yoan_API_Tri est une API RESTful conçue pour gérer les opérations CRUD sur une base de données utilisateur. Ce projet a été réalisé dans le cadre d'un devoir scolaire.
 
 ## Objectif
-Concevoir et développer sa première API, tout en comprenant les fonctionnalités essentielles et en intégrant des algorithmes dans une interface accessible.
+
+L'objectif principal de cette API est de fournir un accès simplifié et sécurisé aux opérations de base de données, sans implémenter de fonctionnalités avancées telles que les jointures SQL, les clauses ORDER BY ou GROUP BY, ou le stockage de données volumineuses.
 
 ## Installation
-Pour débuter avec ce projet, clonez le dépôt sur votre machine en utilisant la commande suivante :
 
 git clone https://github.com/yoanvlt/VIOLLET_Yoan_API_Tri.git
 
-### Utilisation :
+## Configuration
 
-Après avoir installé le projet, voici comment accéder aux différents algorithmes de tri :
+Avant de lancer l'API, assurez-vous de télécharger la base de données et les informations d'authentification :
 
-tri insertion : http://localhost/VIOLLET_Yoan_API_Tri/api/public/index.php?method=insertionsort&json=[6,5,76,54,24,87]
+Voici des pré requêtes d'exemple :
 
-tri à bulle : http://localhost/VIOLLET_Yoan_API_Tri/api/public/index.php?method=bubblesort&json=[6,5,76,54,24,87]
+Insert = localhost/VIOLLET_Yoan_API_Tri/api/public/index2.php?method=insert&json={"email":"example@mail","nom":"example","mot_de_passe":"motdepasse1234"}
 
-tri rapide : http://localhost/VIOLLET_Yoan_API_Tri/api/public/index.php?method=quicksort&json=[6,5,76,54,24,87]
+Update = localhost/VIOLLET_Yoan_API_Tri/api/public/index2.php?method=update&json={"id_utilisateur":x,"email":"example@mail","nom":"example_updated","mot_de_passe":"motdepasse1234"}
+
+Delete = localhost/VIOLLET_Yoan_API_Tri/api/public/index2.php?method=delete&json={"id_utilisateur":x}
+
+Display = localhost/VIOLLET_Yoan_API_Tri/api/public/index2.php?method=display
