@@ -25,3 +25,5 @@ Update = localhost/VIOLLET_Yoan_API_Tri/api/public/index2.php?method=update&json
 Delete = localhost/VIOLLET_Yoan_API_Tri/api/public/index2.php?method=delete&json={"id_utilisateur":x}
 
 Display = localhost/VIOLLET_Yoan_API_Tri/api/public/index2.php?method=display
+
+Display = localhost/VIOLLET_Yoan_API_Tri/api/public/index2.php?method=display&id=7

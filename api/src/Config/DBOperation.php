@@ -14,14 +14,30 @@ class DBOperation
         $this->connection = $connector->getConnection();
     }
 
-    public function Display($tableName) {
+    public function Display($tableName, $where = null) {
         try {
-            $stmt = $this->connection->query("SELECT * FROM " . $tableName);
+            $sql = "SELECT * FROM `$tableName`";
+            if ($where) {
+                $conditions = array_map(function ($key) {
+                    return "`$key` = :$key";
+                }, array_keys($where));
+                $sql .= " WHERE " . implode(' AND ', $conditions);
+            }
+            $stmt = $this->connection->prepare($sql);
+
+            if ($where) {
+                foreach ($where as $key => $val) {
+                    $stmt->bindValue(":$key", $val);
+                }
+            }
+
+            $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
             return ["error" => "An error occurred while displaying records: " . $e->getMessage()];
         }
     }
+
     
     public function Insert2($table, $data) {
 
@@ -93,11 +109,5 @@ class DBOperation
 
         $stmt->execute();
     }
-
-
-
-
-
-
 
 }

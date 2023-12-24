@@ -91,9 +91,17 @@ class EndPoint2 {
 
     public function DisplayUsers() {
         header('Content-Type: application/json');
-        $rows = $this->dbOperations->Display("utilisateur");
+        $where = [];
+        if (isset($_GET['id'])) {
+            $where['id_utilisateur'] = $_GET['id'];
+        }
+        if (isset($_GET['nom'])) {
+            $where['nom'] = $_GET['nom'];
+        }
+        $rows = $this->dbOperations->Display("utilisateur", $where);
         echo json_encode($rows);
     }
+
 
 }
 
