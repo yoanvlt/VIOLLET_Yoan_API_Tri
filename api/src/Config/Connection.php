@@ -6,7 +6,7 @@ use PDO;
 use PDOException;
 use api\src\Library\SecLib;
 
-require_once($_SERVER['DOCUMENT_ROOT'] . "/VIOLLET_Yoan_API_Tri/api/src/Library/SecLib.php");
+require_once(__DIR__ . '/../Library/SecLib.php');
 
 class Connection {
 

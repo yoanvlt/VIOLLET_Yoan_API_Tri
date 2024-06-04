@@ -5,8 +5,8 @@ namespace api\src\Controller;
 use api\src\Config\Connection;
 use api\src\Config\DBOperation;
 
-require_once($_SERVER['DOCUMENT_ROOT'] . "/VIOLLET_Yoan_API_Tri/api/src/Config/Connection.php");
-require_once($_SERVER['DOCUMENT_ROOT'] . "/VIOLLET_Yoan_API_Tri/api/src/Config/DBOperation.php");
+require_once(__DIR__ . '/../Config/Connection.php');
+require_once(__DIR__ . '/../Config/DBOperation.php');
 
 class EndPoint2 {
 
@@ -34,7 +34,6 @@ class EndPoint2 {
         }
 
         $array = ($json) ? json_decode($json, true) : [];
-
 
         switch ($method) {
             case 'insert':
@@ -65,9 +64,7 @@ class EndPoint2 {
         }
     }
 
-
     public function InsertUser($userData) {
-
         if (!isset($userData['mot_de_passe'])) {
             echo json_encode(["error" => "Password is missing"]);
             return;
@@ -77,7 +74,6 @@ class EndPoint2 {
 
         $this->dbOperations->Insert2('utilisateur', $userData);
     }
-
 
     public function UpdateUser($id, $updateData) {
         $criteria = ['id_utilisateur' => $id];
@@ -101,8 +97,4 @@ class EndPoint2 {
         $rows = $this->dbOperations->Display("utilisateur", $where);
         echo json_encode($rows);
     }
-
-
 }
-
-
