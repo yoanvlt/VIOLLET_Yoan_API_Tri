@@ -1,15 +1,25 @@
 <?php
 
-use api\src\controller\EndPoint;
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
-require_once(__DIR__ . "/../src/Controller/EndPoint.php");
+use api\src\Controller\SecureLogin;
+
+require_once(__DIR__ . "/../src/Controller/SecureLogin.php");
 
 
-// Définir le bon en-tête pour indiquer que la réponse est en JSON
-header('Content-Type: application/json');
+header('Content-Type: text/html');
+header('X-Content-Type-Options: nosniff');
+header('X-Frame-Options: DENY');
+header('X-XSS-Protection: 1; mode=block');
+header('Referrer-Policy: no-referrer');
+header('Content-Security-Policy: default-src \'self\'');
 
 try {
-    EndPoint::Routing();
+    SecureLogin::Routing();
 } catch (Exception $e) {
-    echo json_encode(['error' => $e->getMessage()]);
+    echo '<pre>';
+    echo 'Exception: ' . $e->getMessage();
+    echo '</pre>';
 }

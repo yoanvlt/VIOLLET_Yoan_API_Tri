@@ -5,8 +5,7 @@ namespace api\src\Config;
 use PDO;
 use PDOException;
 
-class DBOperation
-{
+class DBOperation {
 
     private $connection;
 
@@ -16,10 +15,10 @@ class DBOperation
 
     public function Display($tableName, $where = null) {
         try {
-            $sql = "SELECT * FROM `$tableName`";
+            $sql = "SELECT * FROM $tableName";
             if ($where) {
                 $conditions = array_map(function ($key) {
-                    return "`$key` = :$key";
+                    return "$key = :$key";
                 }, array_keys($where));
                 $sql .= " WHERE " . implode(' AND ', $conditions);
             }
@@ -38,18 +37,12 @@ class DBOperation
         }
     }
 
-    
     public function Insert2($table, $data) {
-
-        if ($this->connection === null) {
-            $this->connect();
-        }
-
         $keys = array_keys($data);
-        $fields = '`' . implode('`, `', $keys) . '`';
+        $fields = '' . implode(', ', $keys) . '';
         $placeholders = ':' . implode(', :', $keys);
 
-        $sql = "INSERT INTO `$table` ($fields) VALUES ($placeholders)";
+        $sql = "INSERT INTO $table ($fields) VALUES ($placeholders)";
         $stmt = $this->connection->prepare($sql);
 
         foreach ($data as $key => &$val) {
@@ -59,19 +52,13 @@ class DBOperation
         $stmt->execute();
     }
 
-
-    function Delete2($table, $where) {
-
-        if ($this->connection === null) {
-            $this->connect();
-        }
-
-        $conditions = array_map(function($key) {
-            return "`$key` = :$key";
+    public function Delete2($table, $where) {
+        $conditions = array_map(function ($key) {
+            return "$key = :$key";
         }, array_keys($where));
         $conditions = implode(' AND ', $conditions);
 
-        $sql = "DELETE FROM `$table` WHERE $conditions";
+        $sql = "DELETE FROM $table WHERE $conditions";
         $stmt = $this->connection->prepare($sql);
 
         foreach ($where as $key => $val) {
@@ -81,23 +68,18 @@ class DBOperation
         $stmt->execute();
     }
 
-    function Update($table, $data, $where) {
-
-        if ($this->connection === null) {
-            $this->connect();
-        }
-
-        $updateFields = array_map(function($key) {
-            return "`$key` = :update_$key";
+    public function Update($table, $data, $where) {
+        $updateFields = array_map(function ($key) {
+            return "$key = :update_$key";
         }, array_keys($data));
         $updateFields = implode(', ', $updateFields);
 
-        $conditions = array_map(function($key) {
-            return "`$key` = :where_$key";
+        $conditions = array_map(function ($key) {
+            return "$key = :where_$key";
         }, array_keys($where));
         $conditions = implode(' AND ', $conditions);
 
-        $sql = "UPDATE `$table` SET $updateFields WHERE $conditions";
+        $sql = "UPDATE $table SET $updateFields WHERE $conditions";
         $stmt = $this->connection->prepare($sql);
 
         foreach ($data as $key => $val) {
@@ -109,5 +91,4 @@ class DBOperation
 
         $stmt->execute();
     }
-
 }
